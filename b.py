@@ -1,3 +1,21 @@
+# Auto Import Installer
+import os
+try:
+    import threading, time, os, colorama, pyfiglet, random
+    from threading import Thread, Lock
+    from colorama import Fore, Style, Back
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
+    from webdriver_manager.chrome import ChromeDriverManager
+    print(f"\n{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}] {Fore.RESET}Imports successful!")
+    time.sleep(1)
+except:
+    print("\nImports failed! Trying to install...")
+    z = "python -m pip install "; os.system('%srequests' % (z)); os.system('%scolorama' % (z)); os.system('%sthreading' % (z)); os.system('%sos-sys' % (z)); os.system('%sthreading' % (z)); os.system('%srandom' % (z)); os.system('%spyfiglet' % (z))
+    print(f"\n{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}] {Fore.RESET}Imports successful!")
+    time.sleep(1)
+
 # Imports
 import threading, time, os, colorama, pyfiglet, random
 from threading import Thread, Lock
@@ -9,7 +27,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 # Variables
 clear = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
-printLock = threading.Lock()
 os.system(f"title GitHub View Booster - Ready! - discord.gg/kws")
 logo = pyfiglet.figlet_format("GitHub Viewer", font="smkeyboard")
 clear()
