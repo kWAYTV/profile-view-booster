@@ -82,17 +82,16 @@ def start():
         print(logo + Fore.MAGENTA +"\nhttps://github.com/kWAYTV\n\n" + Fore.RESET)
         print(f"{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}]{Fore.RESET} Started sending {Fore.MAGENTA}{int(views)}{Fore.RESET} views to @{Fore.MAGENTA}{profile}{Fore.RESET} with {Fore.MAGENTA}{int(threads)}{Fore.RESET} threads.\n")
         start = time.time()
-        # while count <= views - threads:
-        while count <= int(threads):
+        # Make the threads run until all views are done with safe printing  
+        while count <= (int(views) - int(threads)):
             for i in range(int(threads)):
-                t = Thread(target=boost, args=(lock,))
+                t = Thread(target=boost, args=(printLock,))
                 tArray.append(t)
                 t.start()
-                time.sleep(0.1)
-            for x in tArray:
-                x.join() 
+            for t in tArray:
+                t.join()
         print(f"{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}]{Fore.RESET} All threads stopped.")
-        end = time.time()    
+        end = time.time() 
         doprint(f"\n{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}]{Fore.RESET} Finished sending {Fore.MAGENTA}{int(views)}{Fore.RESET} views to @{Fore.MAGENTA}{profile}{Fore.RESET} with {Fore.MAGENTA}{int(threads)}{Fore.RESET} threads in {Fore.MAGENTA}{round(end-start,2)}{Fore.RESET} seconds.")
         os.system(f"title GitHub View Booster - Finished! - Elapsed {round(end-start,2)} seconds - discord.gg/kws")
         input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Press any key to exit.")
