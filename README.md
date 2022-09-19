@@ -1,4 +1,4 @@
-# Github Profile View Booster
+# Profile View Booster
  Simple & good looking github profile views booster.
 # Proof Of Concept
  You should never use this in your profile, this is only a proof of concept to show you how exploitable this is.
