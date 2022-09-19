@@ -12,7 +12,7 @@ try:
     time.sleep(1)
 except:
     print("\nImports failed! Trying to install...")
-    z = "python -m pip install "; os.system('%srequests' % (z)); os.system('%scolorama' % (z)); os.system('%sthreading' % (z)); os.system('%sos-sys' % (z)); os.system('%sthreading' % (z)); os.system('%srandom' % (z)); os.system('%spyfiglet' % (z))
+    z = "python -m pip install "; os.system('%srequests' % (z)); os.system('%scolorama' % (z)); os.system('%sthreading' % (z)); os.system('%sos-sys' % (z)); os.system('%sthreading' % (z)); os.system('%srandom' % (z)); os.system('%spyfiglet' % (z)); os.system('%sselenium' % (z)); os.system('%swebdriver-manager' % (z))
     print(f"\n{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}] {Fore.RESET}Imports successful!")
     time.sleep(1)
 
