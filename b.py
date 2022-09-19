@@ -48,7 +48,7 @@ else:
 
 # Main function
 os.system(f"title GitHub View Booster - Working... - discord.gg/kws")
-def boost():
+def boost(lock):
     global count
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -83,9 +83,9 @@ def start():
         print(f"{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}]{Fore.RESET} Started sending {Fore.MAGENTA}{int(views)}{Fore.RESET} views to @{Fore.MAGENTA}{profile}{Fore.RESET} with {Fore.MAGENTA}{int(threads)}{Fore.RESET} threads.\n")
         start = time.time()
         # while count <= views - threads:
-        while count <= (int(views) - int(threads)):
+        while count <= int(threads):
             for i in range(int(threads)):
-                t = Thread(target=boost)
+                t = Thread(target=boost, args=(lock,))
                 tArray.append(t)
                 t.start()
                 time.sleep(0.1)
