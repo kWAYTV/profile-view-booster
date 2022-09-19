@@ -57,6 +57,9 @@ def boost():
     global count
     chrome_options = Options()
     chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--incognito")
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.3610")
     with open("proxies.txt", "r") as f:
         proxies = f.read().splitlines()
         proxy = random.choice(proxies)
@@ -79,6 +82,7 @@ def boost():
 
 # Start and threading
 def start():
+    tArray = []
     try:
         clear()
         print(logo + Fore.MAGENTA +"\nhttps://github.com/kWAYTV\n\n" + Fore.RESET)
@@ -88,9 +92,12 @@ def start():
         while count <= (int(views) - int(threads)):
             for i in range(int(threads)):
                 t = Thread(target=boost)
+                tArray.append(t)
                 t.start()
                 time.sleep(0.1)
-            t.join()
+            for x in tArray:
+                x.join() 
+        print(f"{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}]{Fore.RESET} All threads stopped.")
         end = time.time()    
         doprint(f"\n{Fore.MAGENTA}[{Fore.RESET}!{Fore.MAGENTA}]{Fore.RESET} Finished sending {Fore.MAGENTA}{int(views)}{Fore.RESET} views to @{Fore.MAGENTA}{profile}{Fore.RESET} with {Fore.MAGENTA}{int(threads)}{Fore.RESET} threads in {Fore.MAGENTA}{round(end-start,2)}{Fore.RESET} seconds.")
         os.system(f"title GitHub View Booster - Finished! - Elapsed {round(end-start,2)} seconds - discord.gg/kws")
@@ -98,13 +105,13 @@ def start():
         time.sleep(1)
         os._exit(1)
     except KeyboardInterrupt():
-        print(f"\n{Fore.RED}[{Fore.RESET}!{Fore.RED}]{Fore.RESET} User stopped the script.")
+        print(f"\n{Fore.RED}[{Fore.RESET}X{Fore.RED}]{Fore.RESET} User stopped the script.")
         os.system(f"title GitHub View Booster - Stopped! - discord.gg/kws")
         input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Press any key to exit.")
         time.sleep(1)
         os._exit(1)
     except Exception as e:
-        print(f"\n{Fore.RED}[{Fore.RESET}!{Fore.RED}]{Fore.RESET} Error: {str(e)}")
+        print(f"\n{Fore.RED}[{Fore.RESET}X{Fore.RED}]{Fore.RESET} Error: {str(e)}")
         os.system(f"title GitHub View Booster - Error! - discord.gg/kws")
         input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Press any key to exit.")
         time.sleep(1)
