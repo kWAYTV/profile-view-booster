@@ -102,7 +102,7 @@ def start():
         # Make the threads run until all views are done with safe printing  
         while count <= (int(views) - int(threads)):
             for i in range(int(threads)):
-                t = Thread(target=boost, args=(printLock,))
+                t = Thread(target=boost, args=(lock,))
                 tArray.append(t)
                 t.start()
             for t in tArray:
