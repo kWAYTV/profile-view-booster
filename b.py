@@ -27,29 +27,24 @@ print(logo + Fore.MAGENTA +"\nhttps://github.com/kWAYTV\n\n" + Fore.RESET)
 profile = input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Enter the username you want to send the views to (just the {Fore.MAGENTA}exact{Fore.RESET} name): @")
 views = input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Enter the amount of views you want to send to the profile (number will increase a bit depending on threads): ")
 threads = input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Enter the amount of threads you want to use: ")
-proxyless = input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Do you want to use proxies? (y/n): ")
-debug = input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Do you want to see proxy debug messages? (y/n): ")
-if proxyless == "y":
-    proxyless = True
-elif proxyless == "n":
+proxylessChoice = input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Do you want to use proxies? (y/n): ")
+if proxylessChoice == "y":
     proxyless = False
-elif proxyless != "y" or "n":
-    print(f"{Fore.RED}[{Fore.RESET}!{Fore.RED}]{Fore.RESET} Please type y(yes) or n(no).")
-    time.sleep(2)
-    clear()
-    start()
-if proxyless == False:
+    debug = input(f"{Fore.YELLOW}[{Fore.RESET}!{Fore.YELLOW}]{Fore.RESET} Do you want to see proxy debug messages? (y/n): ")
     if debug == "y":
         proxyDebug = True
     elif debug == "n":
         proxyDebug = False
-    elif debug != "y" or "n":
-        print(f"{Fore.RED}[{Fore.RESET}!{Fore.RED}]{Fore.RESET} Please type y(yes) or n(no).")
-        time.sleep(2)
-        clear()
-        start()
+    else:
+        print(f"{Fore.RED}[{Fore.RESET}!{Fore.RED}]{Fore.RESET} Invalid option.")
+        time.sleep(3)
+        exit()
+elif proxylessChoice == "n":
+    proxyless = True
 else:
-    pass
+    print(f"{Fore.RED}[{Fore.RESET}!{Fore.RED}]{Fore.RESET} Invalid option.")
+    time.sleep(3)
+    exit()
 
 # Main function
 os.system(f"title GitHub View Booster - Working... - discord.gg/kws")
@@ -58,17 +53,16 @@ def boost():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--incognito")
-    chrome_options.add_argument("--start-maximized")
     chrome_options.add_argument("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.3610")
-    with open("proxies.txt", "r") as f:
-        proxies = f.read().splitlines()
-        proxy = random.choice(proxies)
-        f.close()
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     if proxyless == False:
+        with open("proxies.txt", "r") as f:
+            proxies = f.read().splitlines()
+            proxy = random.choice(proxies)
+            f.close()
         chrome_options.add_argument(f"--proxy-server={proxy}")
     else:
         pass
-    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(f"https://github.com/{profile}")
     time.sleep(3)
